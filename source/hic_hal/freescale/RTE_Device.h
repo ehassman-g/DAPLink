@@ -90,7 +90,7 @@
 #define RTE_USART3_DMA_RX_DMA_BASE DMA0
 
 /* I2C Select, I2C0 - I2C1. */
-#define RTE_I2C0 0
+#define RTE_I2C0 1
 #define RTE_I2C0_DMA_EN 0
 #define RTE_I2C1 0
 #define RTE_I2C1_DMA_EN 0
