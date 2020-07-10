@@ -421,10 +421,12 @@ uint32_t CLOCK_GetFlashClkFreq(void)
     return CLOCK_GetOutClkFreq() / (SIM_CLKDIV1_OUTDIV4_VAL + 1);
 }
 
+/* TODO: SIM_CLKDIV1_OUTDIV3_VAL not included
 uint32_t CLOCK_GetFlexBusClkFreq(void)
 {
     return CLOCK_GetOutClkFreq() / (SIM_CLKDIV1_OUTDIV3_VAL + 1);
 }
+*/
 
 uint32_t CLOCK_GetBusClkFreq(void)
 {
@@ -449,9 +451,11 @@ uint32_t CLOCK_GetFreq(clock_name_t clockName)
         case kCLOCK_BusClk:
             freq = CLOCK_GetOutClkFreq() / (SIM_CLKDIV1_OUTDIV2_VAL + 1);
             break;
+        /* TODO: Fix
         case kCLOCK_FlexBusClk:
             freq = CLOCK_GetOutClkFreq() / (SIM_CLKDIV1_OUTDIV3_VAL + 1);
             break;
+        */
         case kCLOCK_FlashClk:
             freq = CLOCK_GetOutClkFreq() / (SIM_CLKDIV1_OUTDIV4_VAL + 1);
             break;

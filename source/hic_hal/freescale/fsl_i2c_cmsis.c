@@ -19,6 +19,7 @@
  */
 
 #include "fsl_i2c_cmsis.h"
+#include "fsl_clock.h"
 
 #if ((RTE_I2C0 && defined(I2C0)) || (RTE_I2C1 && defined(I2C1)) || (RTE_I2C2 && defined(I2C2)) || \
      (RTE_I2C3 && defined(I2C3)))
@@ -1162,9 +1163,14 @@ ARM_I2C_STATUS I2C_InterruptGetStatus(cmsis_i2c_interrupt_driver_state_t *i2c)
 #endif
 
 #if defined(I2C0) && RTE_I2C0
+// User implementation
+uint32_t I2C0_GetFreq(void)
+{
+    return CLOCK_GetFreq(I2C0_CLK_SRC);
+    
+}
 /* User needs to provide the implementation for I2C0_GetFreq/InitPins/DeinitPins
 in the application for enabling according instance. */
-extern uint32_t I2C0_GetFreq(void);
 extern void I2C0_InitPins(void);
 extern void I2C0_DeinitPins(void);
 
