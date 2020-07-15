@@ -39,6 +39,7 @@
 #include "sdk.h"
 #include "target_family.h"
 #include "target_board.h"
+#include "i2c.h"
 
 #ifdef DRAG_N_DROP_SUPPORT
 #include "vfs_manager.h"
@@ -208,6 +209,8 @@ void main_task(void * arg)
     gpio_set_hid_led(hid_led_value);
     gpio_set_cdc_led(cdc_led_value);
     gpio_set_msc_led(msc_led_value);
+    // Initialize I2C
+    I2C_Init();
     // Initialize the DAP
     DAP_Setup();
 

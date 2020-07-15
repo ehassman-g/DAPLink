@@ -1166,6 +1166,7 @@ ARM_I2C_STATUS I2C_InterruptGetStatus(cmsis_i2c_interrupt_driver_state_t *i2c)
 // User implementation
 uint32_t I2C0_GetFreq(void)
 {
+    CLOCK_SetXtal0Freq(I2C0_CLK_SRC);
     return CLOCK_GetFreq(I2C0_CLK_SRC);
     
 }

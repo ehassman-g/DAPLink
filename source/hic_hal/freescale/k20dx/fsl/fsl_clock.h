@@ -788,8 +788,8 @@ static inline void CLOCK_DisableUsbfs0Clock(void)
  */
 static inline void CLOCK_SetOutDiv(uint32_t outdiv1, uint32_t outdiv2, uint32_t outdiv3, uint32_t outdiv4)
 {
-    SIM->CLKDIV1 = SIM_CLKDIV1_OUTDIV1(outdiv1) | SIM_CLKDIV1_OUTDIV2(outdiv2) | SIM_CLKDIV1_OUTDIV3(outdiv3) |
-                   SIM_CLKDIV1_OUTDIV4(outdiv4);
+    // ehassman: SIM_CLKDIV1_OUTDIV3 undefined
+    // SIM->CLKDIV1 = SIM_CLKDIV1_OUTDIV1(outdiv1) | SIM_CLKDIV1_OUTDIV2(outdiv2) | SIM_CLKDIV1_OUTDIV3(outdiv3) | SIM_CLKDIV1_OUTDIV4(outdiv4);
 }
 
 /*!
