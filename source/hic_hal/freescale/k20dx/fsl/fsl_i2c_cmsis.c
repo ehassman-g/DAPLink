@@ -836,7 +836,9 @@ int32_t I2C_Master_InterruptTransmit(
         masterXfer.flags |= kI2C_TransferNoStopFlag;
     }
 
-    status = I2C_MasterTransferNonBlocking(i2c->resource->base, &(i2c->handle->master_handle), &masterXfer);
+    // ehassman: use blocking instead of nonblocking
+    // status = I2C_MasterTransferNonBlocking(i2c->resource->base, &(i2c->handle->master_handle), &masterXfer);
+    status = I2C_MasterTransferBlocking(i2c->resource->base, &masterXfer);
 
     switch (status)
     {

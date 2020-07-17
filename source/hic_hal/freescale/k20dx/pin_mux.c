@@ -44,8 +44,8 @@ PinsProfile:
 #include "fsl_port.h"
 #include "pin_mux.h"
 
-#define PIN8_IDX                         8u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         9u   /*!< Pin number for pin 9 in a port */
+#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
+#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
@@ -71,10 +71,10 @@ void BOARD_InitPins(void) {
 }
 
 
-#define PIN8_IDX                         8u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         9u   /*!< Pin number for pin 9 in a port */
-#define PORT_DFER_DFE_8_MASK        0x0100u   /*!< Digital Filter Enable Mask for item 8. */
-#define PORT_DFER_DFE_9_MASK        0x0200u   /*!< Digital Filter Enable Mask for item 9. */
+#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
+#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
+#define PORT_DFER_DFE_8_MASK        0x0001u   /*!< Digital Filter Enable Mask for item 8. */
+#define PORT_DFER_DFE_9_MASK        0x0002u   /*!< Digital Filter Enable Mask for item 9. */
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
@@ -95,10 +95,10 @@ I2C0_InitPins:
  *
  *END**************************************************************************/
 void I2C0_InitPins(void) {
-  CLOCK_EnableClock(kCLOCK_PortD);                           /* Port D Clock Gate Control: Clock enabled */
+  CLOCK_EnableClock(kCLOCK_PortB);                           /* Port D Clock Gate Control: Clock enabled */
 
   PORT_EnablePinsDigitalFilter(                              /* Configure digital filter */
-    PORTD,                                                   /* Digital filter is configured on port D */
+    PORTB,                                                   /* Digital filter is configured on port D */
       PORT_DFER_DFE_8_MASK                                   /* Digital filter is configured for PORTD0 */
     | PORT_DFER_DFE_9_MASK,                                  /* Digital filter is configured for PORTD1 */
     false                                                    /* Disable digital filter */
@@ -112,7 +112,7 @@ void I2C0_InitPins(void) {
     kPORT_MuxAlt2,                                           /* Pin is configured as I2C0_SCL */
     kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
   };
-  PORT_SetPinConfig(PORTD, PIN8_IDX, &portd8_pinC9_config);  /* PORTD8 (pin C9) is configured as I2C0_SCL */
+  PORT_SetPinConfig(PORTB, PIN8_IDX, &portd8_pinC9_config);  /* PORTD8 (pin C9) is configured as I2C0_SCL */
   const port_pin_config_t portd9_pinB9_config = {
     kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
     kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
@@ -126,8 +126,8 @@ void I2C0_InitPins(void) {
 }
 
 
-#define PIN8_IDX                         8u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         9u   /*!< Pin number for pin 9 in a port */
+#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
+#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
 I2C0_DeinitPins:
@@ -147,8 +147,8 @@ I2C0_DeinitPins:
 void I2C0_DeinitPins(void) {
   CLOCK_EnableClock(kCLOCK_PortD);                           /* Port D Clock Gate Control: Clock enabled */
 
-  PORT_SetPinMux(PORTD, PIN8_IDX, kPORT_PinDisabledOrAnalog); /* PORTD8 (pin C9) is disabled */
-  PORT_SetPinMux(PORTD, PIN9_IDX, kPORT_PinDisabledOrAnalog); /* PORTD9 (pin B9) is disabled */
+  PORT_SetPinMux(PORTB, PIN8_IDX, kPORT_PinDisabledOrAnalog); /* PORTD8 (pin C9) is disabled */
+  PORT_SetPinMux(PORTB, PIN9_IDX, kPORT_PinDisabledOrAnalog); /* PORTD9 (pin B9) is disabled */
 }
 
 

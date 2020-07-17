@@ -182,6 +182,10 @@ extern void cdc_process_event(void);
 
 void main_task(void * arg)
 {
+    // ehassman
+    uint64_t count = 0;
+    uint8_t data[2];
+    
     // State processing
     uint16_t flags = 0;
     // LED
@@ -458,6 +462,13 @@ void main_task(void * arg)
                 gpio_set_cdc_led(cdc_led_value);
             }
         }
+        // ehassman
+        if (count % 100000 == 0) {
+            data[0] = 0x01;
+            data[1] = 0xFF;
+            I2Cdrv->MasterTransmit(0x14, data, 2, false);
+        }
+        count++;
     }
 }
 

@@ -53,7 +53,8 @@ void gpio_init(void)
     LED_CONNECTED_GPIO->PCOR = 1UL << LED_CONNECTED_BIT;
     // reset button configured as gpio input
     PIN_nRESET_GPIO->PDDR &= ~PIN_nRESET;
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_MUX(1);
+    // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
+    // PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_MUX(2);
 
     // configure pin as GPIO
     PIN_POWER_EN_PORT->PCR[PIN_POWER_EN_BIT] = PORT_PCR_MUX(1);
