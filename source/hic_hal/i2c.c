@@ -73,8 +73,12 @@ void I2C_Init() {
     static ARM_DRIVER_I2C *I2Cdrv = &Driver_I2C3;
     #endif
     
+    // Set external crystal oscillator freq.
+    // 8MHz
+    CLOCK_SetXtal0Freq(8000000);
+    
     I2Cdrv->Initialize  (I2C_SignalEvent);
     I2Cdrv->PowerControl(ARM_POWER_FULL);
-    I2Cdrv->Control     (ARM_I2C_BUS_SPEED, ARM_I2C_BUS_SPEED_STANDARD);
+    I2Cdrv->Control     (ARM_I2C_BUS_SPEED, ARM_I2C_BUS_SPEED_FAST);
     I2Cdrv->Control     (ARM_I2C_BUS_CLEAR, 0);
 }

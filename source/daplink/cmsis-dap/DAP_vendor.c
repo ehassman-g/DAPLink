@@ -181,14 +181,14 @@ uint32_t DAP_ProcessVendorCommand(const uint8_t *request, uint8_t *response) {
         num += (1U << 16) | 1U; // increment request and response count each by 1
         break;
     }
-    case ID_DAP_Vendor14: break;
-    case ID_DAP_Vendor15: break;
-    case ID_DAP_Vendor16:
+    case ID_DAP_Vendor14:
         uint8_t data[2];
         data[0] = 0x01;
         data[1] = 0xFF;
-        I2Cdrv->MasterTransmit(0x14U, data, 2, false);
+        I2Cdrv->MasterTransmit(0x14, data, 2, true);
     break;
+    case ID_DAP_Vendor15: break;
+    case ID_DAP_Vendor16: break;
     case ID_DAP_Vendor17: break;
     case ID_DAP_Vendor18: break;
     case ID_DAP_Vendor19: break;
