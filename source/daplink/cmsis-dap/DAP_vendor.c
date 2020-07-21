@@ -182,10 +182,8 @@ uint32_t DAP_ProcessVendorCommand(const uint8_t *request, uint8_t *response) {
         break;
     }
     case ID_DAP_Vendor14:
-        uint8_t data[2];
-        data[0] = 0x01;
-        data[1] = 0xFF;
-        I2Cdrv->MasterTransmit(0x14, data, 2, true);
+        uint8_t data[2] = {0x01u, 0xFFu};
+        I2C_DAP_MasterTransfer(0x14u, data, 2);
     break;
     case ID_DAP_Vendor15: break;
     case ID_DAP_Vendor16: break;

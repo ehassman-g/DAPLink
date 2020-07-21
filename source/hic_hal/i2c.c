@@ -9,6 +9,9 @@
 
 #include "i2c.h"
 
+volatile bool completionFlag = false;
+volatile bool nakFlag        = false;
+
 /* I2C Signal Event function callback */
 void I2C_SignalEvent (uint32_t event) {
  
@@ -19,14 +22,17 @@ void I2C_SignalEvent (uint32_t event) {
  
   if (event & ARM_I2C_EVENT_TRANSFER_INCOMPLETE) {
     /* Less data was transferred than requested */
+    completionFlag = false;
   }
  
   if (event & ARM_I2C_EVENT_TRANSFER_DONE) {
     /* Transfer or receive is finished */
+    completionFlag = true;
   }
  
   if (event & ARM_I2C_EVENT_ADDRESS_NACK) {
     /* Slave address was not acknowledged */
+    nakFlag = true;
   }
  
   if (event & ARM_I2C_EVENT_ARBITRATION_LOST) {
@@ -81,4 +87,26 @@ void I2C_Init() {
     I2Cdrv->PowerControl(ARM_POWER_FULL);
     I2Cdrv->Control     (ARM_I2C_BUS_SPEED, ARM_I2C_BUS_SPEED_FAST);
     I2Cdrv->Control     (ARM_I2C_BUS_CLEAR, 0);
+}
+
+bool I2C_DAP_MasterTransfer(uint32_t device_addr, const uint8_t *data, uint32_t num){
+
+    I2Cdrv->MasterTransmit(device_addr, data, num, false);
+    
+    /*  wait for transfer completed. */
+    while ((!nakFlag) && (!completionFlag))
+    {
+    }
+
+    nakFlag = false;
+
+    if (completionFlag == true)
+    {
+        completionFlag = false;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

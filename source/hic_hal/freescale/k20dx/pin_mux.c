@@ -44,8 +44,8 @@ PinsProfile:
 #include "fsl_port.h"
 #include "pin_mux.h"
 
-#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
+#define PIN0_IDX                         0u   /*!< Pin number for pin 8 in a port */
+#define PIN1_IDX                         1u   /*!< Pin number for pin 9 in a port */
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
@@ -66,15 +66,15 @@ BOARD_InitPins:
 void BOARD_InitPins(void) {
   CLOCK_EnableClock(kCLOCK_PortE);                           /* Port E Clock Gate Control: Clock enabled */
 
-  PORT_SetPinMux(PORTE, PIN8_IDX, kPORT_MuxAlt3);            /* PORTE8 (pin F3) is configured as UART5_TX */
-  PORT_SetPinMux(PORTE, PIN9_IDX, kPORT_MuxAlt3);            /* PORTE9 (pin F2) is configured as UART5_RX */
+  PORT_SetPinMux(PORTE, PIN0_IDX, kPORT_MuxAlt3);            /* PORTE8 (pin F3) is configured as UART5_TX */
+  PORT_SetPinMux(PORTE, PIN1_IDX, kPORT_MuxAlt3);            /* PORTE9 (pin F2) is configured as UART5_RX */
 }
 
 
-#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
-#define PORT_DFER_DFE_8_MASK        0x0001u   /*!< Digital Filter Enable Mask for item 8. */
-#define PORT_DFER_DFE_9_MASK        0x0002u   /*!< Digital Filter Enable Mask for item 9. */
+#define PIN0_IDX                         0u   /*!< Pin number for pin 0 in a port */
+#define PIN1_IDX                         1u   /*!< Pin number for pin 1 in a port */
+#define PORT_DFER_DFE_0_MASK        0x0001u   /*!< Digital Filter Enable Mask for item 0. */
+#define PORT_DFER_DFE_1_MASK        0x0002u   /*!< Digital Filter Enable Mask for item 1. */
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
@@ -95,12 +95,12 @@ I2C0_InitPins:
  *
  *END**************************************************************************/
 void I2C0_InitPins(void) {
-  CLOCK_EnableClock(kCLOCK_PortB);                           /* Port D Clock Gate Control: Clock enabled */
+  CLOCK_EnableClock(kCLOCK_PortB);                           /* Port B Clock Gate Control: Clock enabled */
 
   PORT_EnablePinsDigitalFilter(                              /* Configure digital filter */
-    PORTB,                                                   /* Digital filter is configured on port D */
-      PORT_DFER_DFE_8_MASK                                   /* Digital filter is configured for PORTD0 */
-    | PORT_DFER_DFE_9_MASK,                                  /* Digital filter is configured for PORTD1 */
+    PORTB,                                                   /* Digital filter is configured on port B */
+      PORT_DFER_DFE_0_MASK                                   /* Digital filter is configured for PORTB0 */
+    | PORT_DFER_DFE_1_MASK,                                  /* Digital filter is configured for PORTB1 */
     false                                                    /* Disable digital filter */
   );
   const port_pin_config_t portd8_pinC9_config = {
@@ -112,7 +112,7 @@ void I2C0_InitPins(void) {
     kPORT_MuxAlt2,                                           /* Pin is configured as I2C0_SCL */
     kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
   };
-  PORT_SetPinConfig(PORTB, PIN8_IDX, &portd8_pinC9_config);  /* PORTD8 (pin C9) is configured as I2C0_SCL */
+  PORT_SetPinConfig(PORTB, PIN0_IDX, &portd8_pinC9_config);  /* PORTD8 (pin C9) is configured as I2C0_SCL */
   const port_pin_config_t portd9_pinB9_config = {
     kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
     kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
@@ -122,12 +122,10 @@ void I2C0_InitPins(void) {
     kPORT_MuxAlt2,                                           /* Pin is configured as I2C0_SDA */
     kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
   };
-  PORT_SetPinConfig(PORTD, PIN9_IDX, &portd9_pinB9_config);  /* PORTD9 (pin B9) is configured as I2C0_SDA */
+  PORT_SetPinConfig(PORTB, PIN1_IDX, &portd9_pinB9_config);  /* PORTD9 (pin B9) is configured as I2C0_SDA */
 }
 
 
-#define PIN8_IDX                         0u   /*!< Pin number for pin 8 in a port */
-#define PIN9_IDX                         1u   /*!< Pin number for pin 9 in a port */
 /*
  * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
 I2C0_DeinitPins:
@@ -145,92 +143,12 @@ I2C0_DeinitPins:
  *
  *END**************************************************************************/
 void I2C0_DeinitPins(void) {
-  CLOCK_EnableClock(kCLOCK_PortD);                           /* Port D Clock Gate Control: Clock enabled */
+  CLOCK_EnableClock(kCLOCK_PortB);                           /* Port B Clock Gate Control: Clock enabled */
 
-  PORT_SetPinMux(PORTB, PIN8_IDX, kPORT_PinDisabledOrAnalog); /* PORTD8 (pin C9) is disabled */
-  PORT_SetPinMux(PORTB, PIN9_IDX, kPORT_PinDisabledOrAnalog); /* PORTD9 (pin B9) is disabled */
+  PORT_SetPinMux(PORTB, PIN0_IDX, kPORT_PinDisabledOrAnalog); /* PORTB0 (pin ) is disabled */
+  PORT_SetPinMux(PORTB, PIN1_IDX, kPORT_PinDisabledOrAnalog); /* PORTB1 (pin ) is disabled */
 }
 
-
-#define PIN10_IDX                       10u   /*!< Pin number for pin 10 in a port */
-#define PIN11_IDX                       11u   /*!< Pin number for pin 11 in a port */
-#define PORT_DFER_DFE_10_MASK       0x0400u   /*!< Digital Filter Enable Mask for item 10. */
-#define PORT_DFER_DFE_11_MASK       0x0800u   /*!< Digital Filter Enable Mask for item 11. */
-
-/*
- * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
-I2C1_InitPins:
-- options: {coreID: singlecore, enableClock: 'true'}
-- pin_list:
-  - {pin_num: C7, peripheral: I2C1, signal: SCL, pin_signal: ADC1_SE6b/PTC10/I2C1_SCL/I2S0_RX_FS/FB_AD5, slew_rate: fast, open_drain: enable, pull_select: up, pull_enable: enable,
-    passive_filter: disable, digital_filter: disable, drive_strength: low}
-  - {pin_num: B7, peripheral: I2C1, signal: SDA, pin_signal: ADC1_SE7b/PTC11/LLWU_P11/I2C1_SDA/I2S0_RXD1/FB_RW_b, slew_rate: fast, open_drain: enable, pull_select: up,
-    pull_enable: enable, passive_filter: disable, digital_filter: disable, drive_strength: low}
- * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR THE PINS TOOL ***
- */
-
-/*FUNCTION**********************************************************************
- *
- * Function Name : I2C1_InitPins
- * Description   : Configures pin routing and optionally pin electrical features.
- *
- *END**************************************************************************/
-void I2C1_InitPins(void) {
-  CLOCK_EnableClock(kCLOCK_PortC);                           /* Port C Clock Gate Control: Clock enabled */
-
-  PORT_EnablePinsDigitalFilter(                              /* Configure digital filter */
-    PORTC,                                                   /* Digital filter is configured on port C */
-      PORT_DFER_DFE_10_MASK                                  /* Digital filter is configured for PORTC0 */
-    | PORT_DFER_DFE_11_MASK,                                 /* Digital filter is configured for PORTC1 */
-    false                                                    /* Disable digital filter */
-  );
-  const port_pin_config_t portc10_pinC7_config = {
-    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
-    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
-    kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
-    kPORT_OpenDrainEnable,                                   /* Open drain is enabled */
-    kPORT_LowDriveStrength,                                  /* Low drive strength is configured */
-    kPORT_MuxAlt2,                                           /* Pin is configured as I2C1_SCL */
-    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
-  };
-  PORT_SetPinConfig(PORTC, PIN10_IDX, &portc10_pinC7_config); /* PORTC10 (pin C7) is configured as I2C1_SCL */
-  const port_pin_config_t portc11_pinB7_config = {
-    kPORT_PullUp,                                            /* Internal pull-up resistor is enabled */
-    kPORT_FastSlewRate,                                      /* Fast slew rate is configured */
-    kPORT_PassiveFilterDisable,                              /* Passive filter is disabled */
-    kPORT_OpenDrainEnable,                                   /* Open drain is enabled */
-    kPORT_LowDriveStrength,                                  /* Low drive strength is configured */
-    kPORT_MuxAlt2,                                           /* Pin is configured as I2C1_SDA */
-    kPORT_UnlockRegister                                     /* Pin Control Register fields [15:0] are not locked */
-  };
-  PORT_SetPinConfig(PORTC, PIN11_IDX, &portc11_pinB7_config); /* PORTC11 (pin B7) is configured as I2C1_SDA */
-}
-
-
-#define PIN10_IDX                       10u   /*!< Pin number for pin 10 in a port */
-#define PIN11_IDX                       11u   /*!< Pin number for pin 11 in a port */
-/*
- * TEXT BELOW IS USED AS SETTING FOR THE PINS TOOL *****************************
-I2C1_DeinitPins:
-- options: {coreID: singlecore, enableClock: 'true'}
-- pin_list:
-  - {pin_num: B7, peripheral: ADC1, signal: 'SE, 7b', pin_signal: ADC1_SE7b/PTC11/LLWU_P11/I2C1_SDA/I2S0_RXD1/FB_RW_b}
-  - {pin_num: C7, peripheral: ADC1, signal: 'SE, 6b', pin_signal: ADC1_SE6b/PTC10/I2C1_SCL/I2S0_RX_FS/FB_AD5}
- * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR THE PINS TOOL ***
- */
-
-/*FUNCTION**********************************************************************
- *
- * Function Name : I2C1_DeinitPins
- * Description   : Configures pin routing and optionally pin electrical features.
- *
- *END**************************************************************************/
-void I2C1_DeinitPins(void) {
-  CLOCK_EnableClock(kCLOCK_PortC);                           /* Port C Clock Gate Control: Clock enabled */
-
-  PORT_SetPinMux(PORTC, PIN10_IDX, kPORT_PinDisabledOrAnalog); /* PORTC10 (pin C7) is configured as ADC1_SE6b */
-  PORT_SetPinMux(PORTC, PIN11_IDX, kPORT_PinDisabledOrAnalog); /* PORTC11 (pin B7) is configured as ADC1_SE7b */
-}
 
 /*******************************************************************************
  * EOF

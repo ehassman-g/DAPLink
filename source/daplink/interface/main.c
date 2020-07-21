@@ -466,7 +466,7 @@ void main_task(void * arg)
         if (count % 100000 == 0) {
             data[0] = 0x01;
             data[1] = 0xFF;
-            I2Cdrv->MasterTransmit(0x14, data, 2, false);
+            I2C_DAP_MasterTransfer(0x14u, data, 2);
         }
         count++;
     }

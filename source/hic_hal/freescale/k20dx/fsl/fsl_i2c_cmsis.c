@@ -804,6 +804,9 @@ static int32_t I2C_InterruptUninitialize(cmsis_i2c_interrupt_driver_state_t *i2c
 int32_t I2C_Master_InterruptTransmit(
     uint32_t addr, const uint8_t *data, uint32_t num, bool xfer_pending, cmsis_i2c_interrupt_driver_state_t *i2c)
 {
+    // ehassman
+    // I2C0_InitPins();
+    
     int32_t status;
     int32_t ret;
     i2c_master_transfer_t masterXfer;

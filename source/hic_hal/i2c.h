@@ -25,6 +25,6 @@ void I2C_SignalEvent (uint32_t event);
 
 void I2C_Init();
 
-void I2C_MasterTransmit(uint32_t addr, const uint8_t *data, uint32_t num, bool xfer_pending);
+bool I2C_DAP_MasterTransfer(uint32_t addr, const uint8_t *data, uint32_t num);
 
 #endif /* I2C_H_ */

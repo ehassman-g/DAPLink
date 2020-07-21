@@ -189,7 +189,8 @@ __STATIC_INLINE void PORT_SWD_SETUP(void)
     PIN_nRESET_GPIO->PSOR = PIN_nRESET;
     PIN_nRESET_GPIO->PDDR |= PIN_nRESET; //output
     // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(2);
+    // 200720 changed back
+    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
 }
 
 /** Disable JTAG/SWD I/O Pins.
@@ -203,7 +204,8 @@ __STATIC_INLINE void PORT_OFF(void)
     PIN_nRESET_GPIO->PSOR    = 1 << PIN_nRESET_BIT;
     PIN_nRESET_GPIO->PDDR &= ~PIN_nRESET; //input
     // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(2);
+    // 200720 changed back
+    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
 }
 
 
@@ -457,8 +459,9 @@ __STATIC_INLINE void DAP_SETUP(void)
     PIN_SWDIO_IN_GPIO->PDDR &= ~(1 << PIN_SWDIO_IN_BIT);             /* Input */
     /* Configure I/O pin SWDIO_NOE */
     // ehassman: commented next two lines
-    // PIN_SWDIO_NOE_PORT->PCR[PIN_SWDIO_NOE_BIT] = PORT_PCR_MUX(1) |   /* GPIO */
-             // PORT_PCR_DSE_MASK; /* High drive strength */
+    // 200720 uncommented
+    PIN_SWDIO_NOE_PORT->PCR[PIN_SWDIO_NOE_BIT] = PORT_PCR_MUX(1) |   /* GPIO */
+             PORT_PCR_DSE_MASK; /* High drive strength */
     PIN_SWDIO_NOE_GPIO->PSOR  = 1 << PIN_SWDIO_NOE_BIT;              /* High level */
     PIN_SWDIO_NOE_GPIO->PDDR |= 1 << PIN_SWDIO_NOE_BIT;              /* Output */
     /* Configure I/O pin SWD_NOE */
