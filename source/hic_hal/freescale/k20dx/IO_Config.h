@@ -48,6 +48,7 @@ COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_K20DX);
 #define PIN_SWDIO_IN_BIT        7
 
 // SWDIO Neg. Output Enable Pin PTB0
+// I2C0_SCL
 #define PIN_SWDIO_NOE_PORT      PORTB
 #define PIN_SWDIO_NOE_GPIO      PTB
 #define PIN_SWDIO_NOE_BIT       0
@@ -58,6 +59,7 @@ COMPILER_ASSERT(DAPLINK_HIC_ID == DAPLINK_HIC_ID_K20DX);
 #define PIN_SWD_NOE_BIT         4
 
 // nRESET Pin                   PTB1
+// I2C0_SDA
 #define PIN_nRESET_PORT         PORTB
 #define PIN_nRESET_GPIO         PTB
 #define PIN_nRESET_BIT          1

@@ -178,19 +178,18 @@ Configures the DAP Hardware I/O pins for Serial Wire Debug (SWD) mode:
 */
 __STATIC_INLINE void PORT_SWD_SETUP(void)
 {
+    // ehassman: comment out lines with PIN_nRESET
     PIN_SWCLK_GPIO->PSOR     = 1 << PIN_SWCLK_BIT;
     PIN_SWDIO_OUT_GPIO->PSOR = 1 << PIN_SWDIO_OUT_BIT;
     PIN_SWDIO_NOE_GPIO->PCOR = 1 << PIN_SWDIO_NOE_BIT;
     PIN_SWD_NOE_GPIO->PCOR   = 1 << PIN_SWD_NOE_BIT;
-    PIN_nRESET_GPIO->PSOR    = 1 << PIN_nRESET_BIT;
+    // PIN_nRESET_GPIO->PSOR    = 1 << PIN_nRESET_BIT;
     PIN_SWD_NOE_GPIO->PDDR = PIN_SWD_NOE_GPIO->PDDR | (1 << PIN_SWD_NOE_BIT);
     PIN_SWD_NOE_GPIO->PCOR = 1 << PIN_SWD_NOE_BIT;
     PIN_SWDIO_NOE_GPIO->PCOR = 1 << PIN_SWDIO_NOE_BIT;
-    PIN_nRESET_GPIO->PSOR = PIN_nRESET;
-    PIN_nRESET_GPIO->PDDR |= PIN_nRESET; //output
-    // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
-    // 200720 changed back
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
+    // PIN_nRESET_GPIO->PSOR = PIN_nRESET;
+    // PIN_nRESET_GPIO->PDDR |= PIN_nRESET; //output
+    // PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
 }
 
 /** Disable JTAG/SWD I/O Pins.
@@ -199,13 +198,12 @@ Disables the DAP Hardware I/O pins which configures:
 */
 __STATIC_INLINE void PORT_OFF(void)
 {
+    // ehassman: comment out lines with PIN_nRESET
     PIN_SWDIO_NOE_GPIO->PSOR = 1 << PIN_SWDIO_NOE_BIT;
     PIN_SWD_NOE_GPIO->PSOR   = 1 << PIN_SWD_NOE_BIT;
-    PIN_nRESET_GPIO->PSOR    = 1 << PIN_nRESET_BIT;
-    PIN_nRESET_GPIO->PDDR &= ~PIN_nRESET; //input
-    // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
-    // 200720 changed back
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
+    // PIN_nRESET_GPIO->PSOR    = 1 << PIN_nRESET_BIT;
+    // PIN_nRESET_GPIO->PDDR &= ~PIN_nRESET; //input
+    // PIN_nRESET_PORT->PCR[PIN_nRESET_BIT] = PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_PFE_MASK | PORT_PCR_MUX(1);
 }
 
 
@@ -470,13 +468,13 @@ __STATIC_INLINE void DAP_SETUP(void)
     PIN_SWD_NOE_GPIO->PSOR  = 1 << PIN_SWD_NOE_BIT;                  /* High level */
     PIN_SWD_NOE_GPIO->PDDR |= 1 << PIN_SWD_NOE_BIT;                  /* Output */
     /* Configure I/O pin nRESET */
-    // ehassman: change PORT_PCR_MUX(1) to 2, alternative 010
-    PIN_nRESET_PORT->PCR[PIN_nRESET_BIT]       = PORT_PCR_MUX(2)  |  /* GPIO */
-            PORT_PCR_PE_MASK |  /* Pull enable */
-            PORT_PCR_PS_MASK |  /* Pull-up */
-            PORT_PCR_ODE_MASK;  /* Open-drain */
-    PIN_nRESET_GPIO->PSOR  = 1 << PIN_nRESET_BIT;                    /* High level */
-    PIN_nRESET_GPIO->PDDR &= ~(1 << PIN_nRESET_BIT);                    /* Input */
+    // ehassman: comment out lines with PIN_nRESET
+    // PIN_nRESET_PORT->PCR[PIN_nRESET_BIT]       = PORT_PCR_MUX(1)  |  /* GPIO */
+            // PORT_PCR_PE_MASK |  /* Pull enable */
+            // PORT_PCR_PS_MASK |  /* Pull-up */
+            // PORT_PCR_ODE_MASK;  /* Open-drain */
+    // PIN_nRESET_GPIO->PSOR  = 1 << PIN_nRESET_BIT;                    /* High level */
+    // PIN_nRESET_GPIO->PDDR &= ~(1 << PIN_nRESET_BIT);                    /* Input */
     /* Configure LED */
     LED_CONNECTED_PORT->PCR[LED_CONNECTED_BIT] = PORT_PCR_MUX(1)  |  /* GPIO */
             PORT_PCR_ODE_MASK;  /* Open-drain */
