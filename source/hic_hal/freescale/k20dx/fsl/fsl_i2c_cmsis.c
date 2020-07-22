@@ -805,7 +805,7 @@ int32_t I2C_Master_InterruptTransmit(
     uint32_t addr, const uint8_t *data, uint32_t num, bool xfer_pending, cmsis_i2c_interrupt_driver_state_t *i2c)
 {
     // ehassman
-    // I2C0_InitPins();
+    I2C0_InitPins();
     
     int32_t status;
     int32_t ret;
@@ -840,8 +840,8 @@ int32_t I2C_Master_InterruptTransmit(
     }
 
     // ehassman: use blocking instead of nonblocking
-    // status = I2C_MasterTransferNonBlocking(i2c->resource->base, &(i2c->handle->master_handle), &masterXfer);
-    status = I2C_MasterTransferBlocking(i2c->resource->base, &masterXfer);
+    status = I2C_MasterTransferNonBlocking(i2c->resource->base, &(i2c->handle->master_handle), &masterXfer);
+    // status = I2C_MasterTransferBlocking(i2c->resource->base, &masterXfer);
 
     switch (status)
     {
